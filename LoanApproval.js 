@@ -1,0 +1,30 @@
+import { LightningElement, track } from 'lwc';
+import processLoanApproval from '@salesforce/apex/LoanApprovalController.processLoanApproval';
+
+export default class LoanApproval extends LightningElement {
+    @track applicantId = '';
+    @track loanAmount = '';
+    @track approvalStatus;
+    @track errorMessage;
+
+    handleInputChange(event) {
+        const field = event.target.dataset.id;
+        if (field === 'applicantId') {
+            this.applicantId = event.target.value;
+        } else if (field === 'loanAmount') {
+            this.loanAmount = event.target.value;
+        }
+    }
+
+    handleSubmit() {
+        processLoanApproval({ applicantId: this.applicantId, loanAmount: this.loanAmount })
+            .then(result => {
+                this.approvalStatus = result.approvalStatus;
+                this.errorMessage = result.errorMessage;
+            })
+            .catch(error => {
+                this.approvalStatus = 'Error';
+                this.errorMessage = error.body.message;
+            });
+    }
+}

@@ -1,0 +1,17 @@
+<apex:page controller="LoanApprovalController">
+    <apex:form>
+        <!-- Input for Applicant ID -->
+        <apex:inputText value="{!applicantId}" label="Applicant ID" id="applicantId"/>
+        
+        <!-- Input for Loan Amount -->
+        <apex:inputText value="{!loanAmount}" label="Loan Amount" id="loanAmount"/>
+        
+        <!-- Submit button to process the loan -->
+        <apex:commandButton value="Submit" action="{!processLoanApproval}" rerender="result"/>
+        
+        <!-- Output panel to show result -->
+        <apex:outputPanel id="result">
+            <apex:outputText value="{!processLoanApproval}"/>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

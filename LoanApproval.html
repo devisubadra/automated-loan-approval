@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Loan Approval">
+        <lightning-input label="Applicant ID" value={applicantId} onchange={handleInputChange} data-id="applicantId"></lightning-input>
+        <lightning-input label="Loan Amount" type="number" value={loanAmount} onchange={handleInputChange} data-id="loanAmount"></lightning-input>
+        <lightning-button label="Submit" onclick={handleSubmit}></lightning-button>
+        <template if:true={approvalStatus}>
+            <p>Status: {approvalStatus}</p>
+            <template if:true={errorMessage}>
+                <p style="color:red;">Error: {errorMessage}</p>
+            </template>
+        </template>
+    </lightning-card>
+</template>
